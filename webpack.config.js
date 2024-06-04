@@ -1,0 +1,28 @@
+const path = require('path');
+
+module.exports = {
+    entry: './src/index.ts',
+    mode: 'production',
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+        ],
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+    },
+    devtool: 'source-map',
+    devServer: {
+        static: path.join(__dirname, 'public'),
+        compress: true,
+        port: 9000,
+    },
+    output: {
+        filename: '[name].js',
+        path: path.resolve(__dirname, 'public', 'dist'),
+    },
+};
