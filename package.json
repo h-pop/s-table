@@ -4,14 +4,15 @@
   "description": "Stable table in ts/js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve",
-    "build": "webpack --watch"
+    "start": "npm-run-all -p build serve",
+    "build": "webpack --watch",
+    "serve": "webpack serve"
   },
   "keywords": [],
   "author": "Hubert Popiolkiewicz",
   "license": "ISC",
   "devDependencies": {
+    "npm-run-all": "^4.1.5",
     "ts-loader": "^9.5.1",
     "typescript": "^5.4.5",
     "webpack": "^5.91.0",
