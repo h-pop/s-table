@@ -1,0 +1,49 @@
+:root {
+    --s-table-padding: 8px;
+    --s-table-c-primary: color(srgb 0.32 0.36 0.41);
+    --s-table-c-secondary: color(srgb 0.42 0.46 0.51);
+    --s-table-c-font: white;
+}
+
+.s-table-main {
+    background-color: var(--s-table-c-primary);
+    border-radius: 8px;
+    border: 1px solid var(--s-table-c-primary);
+}
+
+.s-table-main *, 
+.s-table-main *::before, 
+.s-table-main *::after {
+    box-sizing: border-box;
+    color: var(--s-table-c-font);
+    font-family: "Segoe UI";
+}
+
+.s-header-main {
+    display: flex;
+    background-color: var(--s-table-c-secondary);
+}
+
+.s-header-cell {
+    flex: 1 1 0px;
+    align-content: center;
+    text-align: center;
+    padding: var(--s-table-padding);
+}
+
+.s-body-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.s-body-row {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid var(--s-table-c-font);
+}
+
+.s-body-cell {
+    flex: 1 1 0px;
+    align-content: center;
+    padding: var(--s-table-padding);
+}
