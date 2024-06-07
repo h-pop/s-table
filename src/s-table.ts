@@ -1,7 +1,9 @@
+import "./styles/styles.css";
 import { SBody } from "./s-body";
 import { SHeader } from "./s-header";
 import { TestData } from "./test-data";
-import "./styles.css";
+import { EventBus } from "./event-bus";
+import { EventEnum, Sort } from "./types";
 
 export class STable {
 
@@ -15,11 +17,34 @@ export class STable {
     this.create();
   }
 
+
   create(): void {
+    this.createHeader();
+    this.createBody();
+
+    EventBus.getInstance().subscribe(EventEnum.SORT, (sort: Sort) => {
+      console.log(sort);
+      this.htmlElement.querySelector('.s-body-main').remove();
+      const sortedData = this.sortData(sort);
+      this.createBody();
+    });
+  }
+
+  private sortData(sort) {
+    return this.data.sort((a, b) =>
+      sort.direction === 'asc'
+        ? (a[sort.columnName] > b[sort.columnName] ? 1 : -1)
+        : (a[sort.columnName] < b[sort.columnName] ? 1 : -1)
+    );
+  }
+
+  private createHeader(): void {
     const sheader = new SHeader(this.columnDefinitions);
     this.htmlElement.appendChild(sheader.get());
+  }
 
-    const sbody = new SBody(this.data);
+  private createBody(data = this.data): void {
+    const sbody = new SBody(data);
     this.htmlElement.appendChild(sbody.get());
   }
 }

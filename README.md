@@ -5,3 +5,5 @@ Key concepts/challenges:
 ---------------------------------------------------------------------
 
 Run `npm start` to run webpack-dev-server with hot code recompile and serve.
+
+Test website using `s-table` can be viewed at `http://localhost:9000/test.html`.

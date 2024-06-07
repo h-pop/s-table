@@ -1,3 +1,6 @@
+
+import { SCell } from "./s-cell";
+
 export class SHeader {
 
     htmlElement: HTMLElement;
@@ -6,11 +9,8 @@ export class SHeader {
         this.htmlElement = document.createElement('div');
         this.htmlElement.setAttribute('class', 's-header-main');
         columnDefinitions.forEach(cd => {
-            const cell = document.createElement('div');
-            cell.setAttribute('class', 's-header-cell');
-            const cellTextNode = document.createTextNode(cd);
-            cell.appendChild(cellTextNode);
-            this.htmlElement.appendChild(cell);
+            const sCell = new SCell(cd);
+            this.htmlElement.appendChild(sCell.get());
         });
     }
 

@@ -26,9 +26,24 @@
 
 .s-header-cell {
     flex: 1 1 0px;
-    align-content: center;
     text-align: center;
     padding: var(--s-table-padding);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.s-header-cell-text {}
+
+.s-header-cell-icon {}
+
+.s-header-cell-icon-hidden {
+    display: none;
+}
+
+.s-header-cell-icon > img {
+    height: 16px;
+    vertical-align: middle;
 }
 
 .s-body-main {
