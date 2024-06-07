@@ -33,15 +33,11 @@
     align-items: center;
 }
 
-.s-header-cell-text {}
-
-.s-header-cell-icon {}
-
-.s-header-cell-icon-hidden {
+.s-sort-hidden {
     display: none;
 }
 
-.s-header-cell-icon > img {
+.s-sort-icon {
     height: 16px;
     vertical-align: middle;
 }

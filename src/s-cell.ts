@@ -1,17 +1,18 @@
 import sortUp from "./assets/sort-up.svg";
 import sortDown from "./assets/sort-down.svg";
 import { EventBus } from "./event-bus";
-import { EventEnum } from "./types";
+import { Direction, EventEnum } from "./types";
 
 export class SCell {
 
     htmlElement: HTMLElement;
 
+    static readonly HIDDEN_CLASS = 's-sort-hidden';
     constructor(columnDefinition) {
         this.htmlElement = document.createElement('div');
         this.appendLabel(columnDefinition);
-        this.appendSortIcon(`s-header-cell-sort-up`, sortUp);
-        this.appendSortIcon('s-header-cell-sort-down', sortDown);
+        this.appendSortIcon(`s-sort-up`, sortUp);
+        this.appendSortIcon('s-sort-down', sortDown);
         this.htmlElement.addEventListener('click', this.sort.bind(this, columnDefinition));
     }
 
@@ -19,57 +20,76 @@ export class SCell {
         return this.htmlElement;
     }
 
-    appendLabel(columnDefinition) {
+    private appendLabel(columnDefinition) {
         this.htmlElement.setAttribute('class', 's-header-cell');
         const cellTextDiv = document.createElement('div');
-        cellTextDiv.setAttribute('class', 's-header-cell-text');
+        cellTextDiv.setAttribute('class', 's-text');
         const cellTextNode = document.createTextNode(columnDefinition);
         cellTextDiv.appendChild(cellTextNode);
         this.htmlElement.appendChild(cellTextDiv);
     }
 
-    appendSortIcon(id, src) {
+    private appendSortIcon(id, src) {
         const cellIconDiv = document.createElement('div');
         cellIconDiv.setAttribute('id', id)
-        cellIconDiv.setAttribute('class', 's-header-cell-icon-hidden');
+        cellIconDiv.setAttribute('class', SCell.HIDDEN_CLASS);
         const sortImg = document.createElement('img');
         sortImg.setAttribute('src', src);
-        sortImg.setAttribute('class', 'sort-icon');
+        sortImg.setAttribute('class', 's-sort-icon');
         cellIconDiv.appendChild(sortImg);
         this.htmlElement.appendChild(cellIconDiv);
     }
 
-    sort(columnDefinition) {
-        const previousSort = this.htmlElement.getAttribute("sort");
-        const currentSort = previousSort && previousSort === 'asc' ? 'desc' : 'asc';
-        this.htmlElement.setAttribute("sort", currentSort);
-        this.displaySort(currentSort);
-        EventBus.getInstance().emit(EventEnum.SORT, { columnName: columnDefinition, direction: currentSort });
+    private sort(columnDefinition) {
+        const direction = this.determineDirection();
+        EventBus.getInstance().emit(EventEnum.SORT, { columnName: columnDefinition, direction: direction });
     }
 
-    private displaySort(currentSort) {
-        if (currentSort === 'asc') {
+    private determineDirection(): Direction {
+        const bothSortsHidden = this.htmlElement.querySelectorAll(`.${SCell.HIDDEN_CLASS}`).length > 1;
+        const sortDescHidden = this.isSortDescHidden();
+        this.hideAllSorts();
+        if (bothSortsHidden) {
             this.showSortAsc();
-        } else if (currentSort === 'desc') {
+            return 'asc';
+        } else if (sortDescHidden) {
             this.showSortDesc();
+            return 'desc';
+        } else {
+            return 'none';
         }
     }
 
+    private hideAllSorts() {
+        document.querySelectorAll('#s-sort-up, #s-sort-down')
+            .forEach(a => a.setAttribute('class', SCell.HIDDEN_CLASS));
+    }
+
     private showSortDesc() {
-        this.getSortDesc().setAttribute('class', 's-header-cell-icon');
-        this.getSortAsc().setAttribute('class', 's-header-cell-icon-hidden');
+        this.showSort(this.getSortDesc());
     }
 
     private showSortAsc() {
-        this.getSortAsc().setAttribute('class', 's-header-cell-icon');
-        this.getSortDesc().setAttribute('class', 's-header-cell-icon-hidden');
+        this.showSort(this.getSortAsc());
+    }
+
+    private showSort(element: Element): void {
+        element.classList.remove(SCell.HIDDEN_CLASS);
     }
 
     private getSortAsc() {
-        return this.htmlElement.querySelector('#s-header-cell-sort-up');
+        return this.htmlElement.querySelector('#s-sort-up');
     }
 
     private getSortDesc() {
-        return this.htmlElement.querySelector('#s-header-cell-sort-down');
+        return this.htmlElement.querySelector('#s-sort-down');
+    }
+
+    private isSortDescHidden(): boolean {
+        return this.isSortHidden(this.getSortDesc());
+    }
+
+    private isSortHidden(element: Element): boolean {
+        return element.classList.contains("s-sort-hidden");
     }
 }

@@ -17,8 +17,7 @@ export class STable {
     this.create();
   }
 
-
-  create(): void {
+  private create(): void {
     this.createHeader();
     this.createBody();
 
@@ -26,12 +25,15 @@ export class STable {
       console.log(sort);
       this.htmlElement.querySelector('.s-body-main').remove();
       const sortedData = this.sortData(sort);
-      this.createBody();
+      this.createBody(sortedData);
     });
   }
 
   private sortData(sort) {
-    return this.data.sort((a, b) =>
+    if (sort.direction === 'none') {
+      return this.data;
+    }
+    return [...this.data].sort((a, b) =>
       sort.direction === 'asc'
         ? (a[sort.columnName] > b[sort.columnName] ? 1 : -1)
         : (a[sort.columnName] < b[sort.columnName] ? 1 : -1)

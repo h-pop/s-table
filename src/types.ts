@@ -1,4 +1,4 @@
-export type Direction = 'asc' | 'desc';
+export type Direction = 'asc' | 'desc' | 'none';
 export type Sort = {
     columnName: string;
     direction: Direction;
