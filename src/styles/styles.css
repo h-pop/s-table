@@ -8,7 +8,6 @@
 .s-table-main {
     background-color: var(--s-table-c-primary);
     border-radius: 8px;
-    border: 1px solid var(--s-table-c-primary);
 }
 
 .s-table-main *, 
@@ -22,6 +21,7 @@
 .s-header-main {
     display: flex;
     background-color: var(--s-table-c-secondary);
+    border-radius: 8px 8px 0 0;
 }
 
 .s-header-cell {
@@ -29,8 +29,8 @@
     text-align: center;
     padding: var(--s-table-padding);
     display: flex;
-    justify-content: center;
     align-items: center;
+    height: 48px;
 }
 
 .s-sort-hidden {
