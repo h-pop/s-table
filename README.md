@@ -6,19 +6,25 @@ Key concepts/challenges
 Usage
 ---
 
-1. Init the sTable library:
+1. Init the sTable library providing valid library directory:
 ```
-<script src="dist/sTable.js"></script>
+<script src="sTable.js"></script>
 ```
-2. Create sTable instance inside provided html container:
+2. Create some html container, in which sTable will reside:
+```
+<div id="s-table-container"></div>
+```
+3. Create sTable instance inside provided html container:
 ```
 container = document.getElementById('s-table-container');
 sTable.create(container);
 ```
-Whole example on how to use this library can be found in [this test html file](test.html).
+Whole example on how to use this library can be found in [this example html file](example.html).
 
 Development
 ---
-Run `npm start` to run webpack-dev-server with hot code recompile and serve.
+Run `npm run serve` to run webpack-dev-server with hot code recompile and serve.
 
-Test website using `s-table` can be viewed at `http://localhost:9000/test.html`.
+Example website using `sTable` can be viewed at `http://localhost:9000/example.html`.
+
+Run `npm run pack-lib` to build library using webpack and pack it using npm.

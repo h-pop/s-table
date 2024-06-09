@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: './src/index.ts',
@@ -6,7 +7,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
+                test: /\.ts$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
@@ -24,17 +25,27 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
-    },
-    devtool: 'source-map',
-    devServer: {
-        static: path.join(__dirname),
-        port: 9000,
+        extensions: ['.ts', '.js'],
     },
     output: {
         filename: 'sTable.js',
         path: path.resolve(__dirname, 'dist'),
-        library: 'sTable',
         libraryTarget: 'umd',
+        library: 'sTable',
     },
+    devtool: false,
+    devServer: {
+        static: path.join(__dirname),
+        port: 9000,
+    },
+    plugins: [
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: 'example.html', 
+                    to: 'example.html'
+                }
+            ]
+        }),
+    ]
 };

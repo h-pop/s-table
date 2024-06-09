@@ -1,21 +1,20 @@
 {
   "name": "@hpopiolkiewicz/s-table",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Stable table in ts/js",
   "main": "./dist/sTable.js",
   "scripts": {
-    "start": "npm-run-all -p watch serve",
     "build": "webpack",
-    "watch": "webpack --watch",
-    "serve": "webpack serve"
+    "serve": "webpack serve",
+    "pack-lib": "npm run build && npm pack"
   },
   "keywords": [],
   "author": "Hubert Popiolkiewicz",
   "license": "ISC",
   "devDependencies": {
+    "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
     "file-loader": "^6.2.0",
-    "npm-run-all": "^4.1.5",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.4.5",
