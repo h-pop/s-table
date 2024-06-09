@@ -2,13 +2,15 @@ import sortUp from "./assets/sort-up.svg";
 import sortDown from "./assets/sort-down.svg";
 import { EventBus } from "./event-bus";
 import { Direction, EventEnum } from "./types";
+import { SColumnDef } from "./s-column-def";
 
 export class SCell {
 
     htmlElement: HTMLElement;
 
     static readonly HIDDEN_CLASS = 's-sort-hidden';
-    constructor(columnDefinition) {
+
+    constructor(columnDefinition: SColumnDef) {
         this.htmlElement = document.createElement('div');
         this.appendLabel(columnDefinition);
         this.appendSortIcon(`s-sort-up`, sortUp);
@@ -20,11 +22,11 @@ export class SCell {
         return this.htmlElement;
     }
 
-    private appendLabel(columnDefinition) {
+    private appendLabel(columnDefinition: SColumnDef) {
         this.htmlElement.setAttribute('class', 's-header-cell');
         const cellTextDiv = document.createElement('div');
         cellTextDiv.setAttribute('class', 's-text');
-        const cellTextNode = document.createTextNode(columnDefinition);
+        const cellTextNode = document.createTextNode(columnDefinition.name);
         cellTextDiv.appendChild(cellTextNode);
         this.htmlElement.appendChild(cellTextDiv);
     }
@@ -40,9 +42,9 @@ export class SCell {
         this.htmlElement.appendChild(cellIconDiv);
     }
 
-    private sort(columnDefinition) {
+    private sort(columnDefinition: SColumnDef) {
         const direction = this.determineDirection();
-        EventBus.getInstance().emit(EventEnum.SORT, { columnName: columnDefinition, direction: direction });
+        EventBus.getInstance().emit(EventEnum.SORT, { columnName: columnDefinition.name, direction: direction });
     }
 
     private determineDirection(): Direction {

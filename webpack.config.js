@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     entry: './src/index.ts',
-    mode: 'production',
+    mode: 'development',
     module: {
         rules: [
             {
@@ -25,12 +25,13 @@ module.exports = {
     },
     devtool: 'source-map',
     devServer: {
-        static: path.join(__dirname, 'public'),
-        compress: true,
+        static: path.join(__dirname),
         port: 9000,
     },
     output: {
-        filename: '[name].js',
-        path: path.resolve(__dirname, 'public', 'dist'),
+        filename: 'sTable.js',
+        path: path.resolve(__dirname, 'dist'), 
+        library: 'sTable',
+        libraryTarget: 'umd',
     },
 };

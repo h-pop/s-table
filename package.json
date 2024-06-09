@@ -1,11 +1,12 @@
 {
-  "name": "s-table",
-  "version": "0.0.1",
+  "name": "@hpopiolkiewicz/s-table",
+  "version": "0.0.2",
   "description": "Stable table in ts/js",
-  "main": "index.js",
+  "main": "./dist/sTable.js",
   "scripts": {
-    "start": "npm-run-all -p build serve",
-    "build": "webpack --watch",
+    "start": "npm-run-all -p watch serve",
+    "build": "webpack",
+    "watch": "webpack --watch",
     "serve": "webpack serve"
   },
   "keywords": [],
@@ -21,5 +22,8 @@
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

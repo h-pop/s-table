@@ -1,8 +1,17 @@
 import { STable } from "./s-table";
+import { TestData } from "./test-data";
 
-function app() {
-  const container = document.getElementById('s-table-container');
-  new STable(container);
+function create(container) {
+    new STable(container, {
+        data: TestData.animals,
+        columns: [
+            { name: 'name' },
+            { name: 'type' },
+            { name: 'isVaccinated' },
+            { name: 'incidentDescription' },
+            { name: 'context' }
+        ]
+    });
 }
 
-new app();
+export { create };
