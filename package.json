@@ -1,6 +1,6 @@
 {
   "name": "@hpopiolkiewicz/s-table",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Stable table in ts/js",
   "main": "./dist/sTable.js",
   "scripts": {

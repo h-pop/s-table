@@ -16,8 +16,11 @@ module.exports = {
             },
             {
                 test: /\.svg$/i,
-                use: ['file-loader'],
-              },
+                loader: 'file-loader',
+                options: {
+                  outputPath: 'assets',
+                },
+            },
         ],
     },
     resolve: {
@@ -30,7 +33,7 @@ module.exports = {
     },
     output: {
         filename: 'sTable.js',
-        path: path.resolve(__dirname, 'dist'), 
+        path: path.resolve(__dirname, 'dist'),
         library: 'sTable',
         libraryTarget: 'umd',
     },
