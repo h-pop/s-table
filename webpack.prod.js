@@ -8,8 +8,8 @@ module.exports = merge(common, {
       new CopyWebpackPlugin({
           patterns: [
               {
-                  from: 'example', 
-                  to: 'example'
+                  from: 'example_standalone.html', 
+                  to: 'example_standalone.html'
               }
           ]
       }),

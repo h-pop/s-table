@@ -7629,8 +7629,5 @@ class TestData {
         columns: TestData.animalsColumns
     };
 }
-
-sTable.create( 
-    document.getElementById('s-table-container'), 
-    TestData.animalsConfiguration
-);
+const htmlElement = document.getElementById('s-table-container');
+sTable.create(htmlElement, TestData.animalsConfiguration);

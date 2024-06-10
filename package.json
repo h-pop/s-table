@@ -1,11 +1,11 @@
 {
   "name": "@hpopiolkiewicz/s-table",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Stable table in ts/js",
   "main": "./dist/sTable.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
-    "serve": "webpack serve  --config webpack.dev.js",
+    "serve": "webpack serve --config webpack.dev.js",
     "pack-lib": "npm run build && npm pack"
   },
   "keywords": [],
@@ -21,7 +21,8 @@
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4",
-    "webpack-merge": "^5.10.0"
+    "webpack-merge": "^5.10.0",
+    "@hpopiolkiewicz/s-table": "0.0.5"
   },
   "files": [
     "dist"
