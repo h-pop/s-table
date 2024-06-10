@@ -34,7 +34,7 @@ const sTableConfig = {
 }
 sTable.create(htmlElement, sTableConfig);
 ```
-Whole example on how to use this library can be found in [this file](dist/example_standalone.html) or on [github repository](https://github.com/h-pop/s-table/tree/master/example).
+Whole example on how to use this library can be found in `example_standalone.html` file or on [github repository](https://github.com/h-pop/s-table/tree/master/example).
 
 Development
 ---
