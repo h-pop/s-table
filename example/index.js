@@ -1,5 +1,5 @@
-export class TestData {
-    static readonly animals = [
+class TestData {
+    static animals = [
         {
             "name": "Buddy",
             "type": "dog",
@@ -7617,4 +7617,20 @@ export class TestData {
             "context": "missing"
         }
     ];
+    static animalsColumns = [
+        { name: 'name' },
+        { name: 'type' },
+        { name: 'isVaccinated' },
+        { name: 'incidentDescription' },
+        { name: 'context' }
+    ];
+    static animalsConfiguration = {
+        data: TestData.animals,
+        columns: TestData.animalsColumns
+    };
 }
+
+sTable.create( 
+    document.getElementById('s-table-container'), 
+    TestData.animalsConfiguration
+);

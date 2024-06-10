@@ -8,7 +8,7 @@ export class SHeader {
     constructor(columnDefinitions) {
         this.htmlElement = document.createElement('div');
         this.htmlElement.setAttribute('class', 's-header-main');
-        columnDefinitions.forEach(cd => {
+        columnDefinitions?.forEach(cd => {
             const sCell = new SCell(cd);
             this.htmlElement.appendChild(sCell.get());
         });

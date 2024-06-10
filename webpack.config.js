@@ -1,9 +1,7 @@
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: './src/index.ts',
-    mode: 'development',
     module: {
         rules: [
             {
@@ -19,7 +17,7 @@ module.exports = {
                 test: /\.svg$/i,
                 loader: 'file-loader',
                 options: {
-                  outputPath: 'assets',
+                    outputPath: 'assets',
                 },
             },
         ],
@@ -33,19 +31,4 @@ module.exports = {
         libraryTarget: 'umd',
         library: 'sTable',
     },
-    devtool: false,
-    devServer: {
-        static: path.join(__dirname),
-        port: 9000,
-    },
-    plugins: [
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: 'example.html', 
-                    to: 'example.html'
-                }
-            ]
-        }),
-    ]
 };

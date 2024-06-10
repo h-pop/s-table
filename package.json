@@ -4,8 +4,8 @@
   "description": "Stable table in ts/js",
   "main": "./dist/sTable.js",
   "scripts": {
-    "build": "webpack",
-    "serve": "webpack serve",
+    "build": "webpack --config webpack.prod.js",
+    "serve": "webpack serve  --config webpack.dev.js",
     "pack-lib": "npm run build && npm pack"
   },
   "keywords": [],
@@ -20,7 +20,8 @@
     "typescript": "^5.4.5",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
+    "webpack-dev-server": "^5.0.4",
+    "webpack-merge": "^5.10.0"
   },
   "files": [
     "dist"

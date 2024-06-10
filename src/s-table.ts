@@ -23,7 +23,6 @@ export class STable {
     this.createBody();
 
     EventBus.getInstance().subscribe(EventEnum.SORT, (sort: Sort) => {
-      console.log(sort);
       this.htmlElement.querySelector('.s-body-main').remove();
       const sortedData = this.sortData(sort);
       this.createBody(sortedData);

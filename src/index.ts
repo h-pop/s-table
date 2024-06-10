@@ -1,17 +1,8 @@
 import { STable } from "./s-table";
-import { TestData } from "./test-data";
+import { STableConfig } from "./s-table-config";
 
-function create(container) {
-    new STable(container, {
-        data: TestData.animals,
-        columns: [
-            { name: 'name' },
-            { name: 'type' },
-            { name: 'isVaccinated' },
-            { name: 'incidentDescription' },
-            { name: 'context' }
-        ]
-    });
+function create(container: HTMLElement, sTableConfig: STableConfig) {
+    new STable(container, sTableConfig);
 }
 
 export { create };

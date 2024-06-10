@@ -5,7 +5,7 @@ export class SBody {
     constructor(data) {
         this.htmlElement = document.createElement('div');
         this.htmlElement.setAttribute('class', 's-body-main');
-        data.forEach(entry => {
+        data?.forEach(entry => {
             const row = document.createElement('div');
             row.setAttribute('class', 's-body-row');
             for (const field in entry) {
