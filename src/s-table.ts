@@ -4,6 +4,7 @@ import { SHeader } from "./s-header";
 import { EventBus } from "./event-bus";
 import { EventEnum, Sort } from "./types";
 import { STableConfig } from "./s-table-config";
+import { SFilter } from "./s-filter";
 
 export class STable {
 
@@ -20,6 +21,7 @@ export class STable {
 
   private create(): void {
     this.createHeader();
+    this.createFilter();
     this.createBody();
 
     EventBus.getInstance().subscribe(EventEnum.SORT, (sort: Sort) => {
@@ -27,6 +29,12 @@ export class STable {
       const sortedData = this.sortData(sort);
       this.createBody(sortedData);
     });
+
+    EventBus.getInstance().subscribe(EventEnum.FILTER, (emitted: any) => {
+      this.htmlElement.querySelector('.s-body-main').remove();
+      const filteredData = this.filterData(emitted);
+      this.createBody(filteredData);
+    })
   }
 
   private sortData(sort) {
@@ -40,9 +48,18 @@ export class STable {
     );
   }
 
+  private filterData(filter) {
+    return this.sTableConfig.data.filter(entry => entry[filter.columnName].includes(filter.filterValue));
+  }
+
   private createHeader(): void {
     const sheader = new SHeader(this.sTableConfig.columns);
     this.htmlElement.appendChild(sheader.get());
+  }
+
+  private createFilter(): void {
+    const sfilter = new SFilter(this.sTableConfig.columns);
+    this.htmlElement.appendChild(sfilter.get());
   }
 
   private createBody(data = this.sTableConfig.data): void {

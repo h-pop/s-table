@@ -25,12 +25,30 @@
 }
 
 .s-header-cell {
-    flex: 1 1 0px;
+    overflow: hidden;
+    flex: 1 0 0;
     text-align: center;
     padding: var(--s-table-padding);
     display: flex;
     align-items: center;
     height: 48px;
+}
+
+.s-filter-cell {
+    flex: 1 1 0px;
+    text-align: center;
+    padding: var(--s-table-padding);
+    display: flex;
+    align-items: center;
+    input {
+        width: 100%;
+        outline: none;
+        background-color: var(--s-table-c-primary);
+        border: none;
+    }
+    input:hover {
+        outline: none;
+    }
 }
 
 .s-sort-hidden {

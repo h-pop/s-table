@@ -4,7 +4,7 @@ import { EventBus } from "./event-bus";
 import { Direction, EventEnum } from "./types";
 import { SColumnDef } from "./s-column-def";
 
-export class SCell {
+export class SHeaderCell {
 
     htmlElement: HTMLElement;
 
@@ -12,6 +12,7 @@ export class SCell {
 
     constructor(columnDefinition: SColumnDef) {
         this.htmlElement = document.createElement('div');
+        this.htmlElement.setAttribute('class', 's-header-cell');
         this.appendLabel(columnDefinition);
         this.appendSortIcon(`s-sort-up`, sortUp);
         this.appendSortIcon('s-sort-down', sortDown);
@@ -23,7 +24,6 @@ export class SCell {
     }
 
     private appendLabel(columnDefinition: SColumnDef) {
-        this.htmlElement.setAttribute('class', 's-header-cell');
         const cellTextDiv = document.createElement('div');
         cellTextDiv.setAttribute('class', 's-text');
         const cellTextNode = document.createTextNode(columnDefinition.name);
@@ -34,7 +34,7 @@ export class SCell {
     private appendSortIcon(id, src) {
         const cellIconDiv = document.createElement('div');
         cellIconDiv.setAttribute('id', id)
-        cellIconDiv.setAttribute('class', SCell.HIDDEN_CLASS);
+        cellIconDiv.setAttribute('class', SHeaderCell.HIDDEN_CLASS);
         const sortImg = document.createElement('img');
         sortImg.setAttribute('src', src);
         sortImg.setAttribute('class', 's-sort-icon');
@@ -48,7 +48,7 @@ export class SCell {
     }
 
     private determineDirection(): Direction {
-        const bothSortsHidden = this.htmlElement.querySelectorAll(`.${SCell.HIDDEN_CLASS}`).length > 1;
+        const bothSortsHidden = this.htmlElement.querySelectorAll(`.${SHeaderCell.HIDDEN_CLASS}`).length > 1;
         const sortDescHidden = this.isSortDescHidden();
         this.hideAllSorts();
         if (bothSortsHidden) {
@@ -64,7 +64,7 @@ export class SCell {
 
     private hideAllSorts() {
         document.querySelectorAll('#s-sort-up, #s-sort-down')
-            .forEach(a => a.setAttribute('class', SCell.HIDDEN_CLASS));
+            .forEach(a => a.setAttribute('class', SHeaderCell.HIDDEN_CLASS));
     }
 
     private showSortDesc() {
@@ -76,7 +76,7 @@ export class SCell {
     }
 
     private showSort(element: Element): void {
-        element.classList.remove(SCell.HIDDEN_CLASS);
+        element.classList.remove(SHeaderCell.HIDDEN_CLASS);
     }
 
     private getSortAsc() {

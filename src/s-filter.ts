@@ -1,7 +1,5 @@
-
-import { SHeaderCell } from "./s-header-cell";
-
-export class SHeader {
+import { SFilterCell } from "./s-filter-cell";
+export class SFilter {
 
     htmlElement: HTMLElement;
 
@@ -9,8 +7,8 @@ export class SHeader {
         this.htmlElement = document.createElement('div');
         this.htmlElement.setAttribute('class', 's-header-main');
         columnDefinitions?.forEach(cd => {
-            const sCell = new SHeaderCell(cd);
-            this.htmlElement.appendChild(sCell.get());
+            const sFilterCell = new SFilterCell(cd);
+            this.htmlElement.appendChild(sFilterCell.get());
         });
     }
 

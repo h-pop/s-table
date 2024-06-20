@@ -8,5 +8,5 @@ export type TypedEventListener = {
     eventType: EventEnum;
 }
 export enum EventEnum {
-    SORT
+    SORT, FILTER
 }
