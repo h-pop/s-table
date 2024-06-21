@@ -5,12 +5,13 @@ import { EventEnum } from "./types";
 export class SFilterCell {
 
     htmlElement: HTMLElement;
+    onFilterChange: Function;
 
-    constructor(columnDefinition: SColumnDef) {
+    constructor() {
         this.htmlElement = document.createElement('div');
         this.htmlElement.setAttribute('class', 's-filter-cell');
         const inputElement = document.createElement("input");
-        inputElement.addEventListener('change', this.filter.bind(this, columnDefinition));
+        inputElement.addEventListener('change', this.filter.bind(this));
         this.htmlElement.appendChild(inputElement);
     }
 
@@ -18,10 +19,12 @@ export class SFilterCell {
         return this.htmlElement;
     }
 
-    filter(columnDefinition, event) {
-        const filterValue = event.target.value;
-        console.log(columnDefinition);
-        EventBus.getInstance().emit(EventEnum.FILTER, { columnName: columnDefinition.name, filterValue: filterValue });
+    setOnFilterChange(func: Function): void {
+        this.onFilterChange = func;
+    }
+
+    filter(event) {
+        this.onFilterChange(event.target.value);
     };
 
 }

@@ -48,8 +48,12 @@ export class STable {
     );
   }
 
-  private filterData(filter) {
-    return this.sTableConfig.data.filter(entry => entry[filter.columnName].includes(filter.filterValue));
+  private filterData(filterObject) {
+    let result = this.sTableConfig.data;
+    for (const filterObjectField in filterObject) {
+      result = result.filter(e => e[filterObjectField]?.includes(filterObject[filterObjectField]));
+    }
+    return result;
   }
 
   private createHeader(): void {
