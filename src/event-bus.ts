@@ -22,7 +22,7 @@ export class EventBus {
     }
 
     public subscribe(eventType: EventEnum, callback) {
-        const eventListener = { eventType: eventType, callback: callback }
+        const eventListener: TypedEventListener = { eventType: eventType, callback: callback };
         this.listeners.push(eventListener);
         return eventListener;
     }

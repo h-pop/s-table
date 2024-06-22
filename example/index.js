@@ -7630,4 +7630,7 @@ class TestData {
     };
 }
 const htmlElement = document.getElementById('s-table-container');
-sTable.create(htmlElement, TestData.animalsConfiguration);
+const config = TestData.animalsConfiguration;
+config.showFilter = true;
+const instance = sTable.create(htmlElement, config);
+// instance.showFilter(true);

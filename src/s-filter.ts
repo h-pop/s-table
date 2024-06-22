@@ -2,7 +2,6 @@ import { EventBus } from "./event-bus";
 import { SFilterCell } from "./s-filter-cell";
 import { EventEnum } from "./types";
 export class SFilter {
-
     htmlElement: HTMLElement;
     filterObject = {};
     constructor(columnDefinitions) {
@@ -15,11 +14,23 @@ export class SFilter {
         });
     }
 
-    get(): HTMLElement {
+    public get(): HTMLElement {
         return this.htmlElement;
     }
 
-    onFilterChange(columnDefinition, filterValue): void {
+    public getFilterObject(): any {
+        return this.filterObject;
+    }
+
+    public hide() {
+        this.htmlElement.setAttribute('class', 's-hidden');
+    }
+
+    public show() {
+        this.htmlElement.classList.remove('class', 's-hidden');
+    }
+
+    private onFilterChange(columnDefinition, filterValue): void {
         if (filterValue) {
             this.filterObject[columnDefinition.name] = filterValue;
         } else {
