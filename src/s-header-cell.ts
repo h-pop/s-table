@@ -7,6 +7,7 @@ import { SColumnDef } from "./s-column-def";
 export class SHeaderCell {
 
     htmlElement: HTMLElement;
+    onSortChange: Function;
 
     static readonly HIDDEN_CLASS = 's-sort-hidden';
 
@@ -16,11 +17,15 @@ export class SHeaderCell {
         this.appendLabel(columnDefinition);
         this.appendSortIcon(`s-sort-up`, sortUp);
         this.appendSortIcon('s-sort-down', sortDown);
-        this.htmlElement.addEventListener('click', this.sort.bind(this, columnDefinition));
+        this.htmlElement.addEventListener('click', this.sort.bind(this));
     }
 
-    get(): HTMLElement {
+    public get(): HTMLElement {
         return this.htmlElement;
+    }
+
+    public setOnSortChange(fn: Function) {
+        this.onSortChange = fn;
     }
 
     private appendLabel(columnDefinition: SColumnDef) {
@@ -42,9 +47,9 @@ export class SHeaderCell {
         this.htmlElement.appendChild(cellIconDiv);
     }
 
-    private sort(columnDefinition: SColumnDef) {
+    private sort(): void {
         const direction = this.determineDirection();
-        EventBus.getInstance().emit(EventEnum.SORT, { columnName: columnDefinition.name, direction: direction });
+        this.onSortChange(direction);
     }
 
     private determineDirection(): Direction {

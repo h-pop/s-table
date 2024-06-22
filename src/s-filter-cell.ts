@@ -19,8 +19,8 @@ export class SFilterCell {
         return this.htmlElement;
     }
 
-    setOnFilterChange(func: Function): void {
-        this.onFilterChange = func;
+    setOnFilterChange(fn: Function): void {
+        this.onFilterChange = fn;
     }
 
     filter(event) {

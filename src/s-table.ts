@@ -31,15 +31,19 @@ export class STable {
     this.createBody();
   }
 
-  private sortData(sort) {
-    if (sort.direction === 'none') {
-      return this.sTableConfig.data;
-    }
-    return [...this.sTableConfig.data].sort((a, b) =>
-      sort.direction === 'asc'
-        ? (a[sort.columnName] > b[sort.columnName] ? 1 : -1)
-        : (a[sort.columnName] < b[sort.columnName] ? 1 : -1)
-    );
+  private sortData(sortObject) {
+    return this.sTableConfig.data.slice()
+      .sort((left, right) => {
+        let orders: number;
+        for (const sortObjectField in sortObject) {
+          if(sortObject[sortObjectField] === 'none') {
+            continue;
+          }
+          let order = ('' + left[sortObjectField]).localeCompare(('' + right[sortObjectField]))
+          orders ||= sortObject[sortObjectField] === 'asc' ? order : -order;
+        }
+        return orders;
+      });
   }
 
   private filterData(filterObject) {
@@ -78,7 +82,7 @@ export class STable {
   // PUBLIC API
 
   public showFilter(showFilter: boolean): void {
-    if(showFilter) {
+    if (showFilter) {
       if (this.sFilter) {
         this.sFilter.show();
       } else {
