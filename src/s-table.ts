@@ -36,9 +36,6 @@ export class STable {
       .sort((left, right) => {
         let orders: number;
         for (const sortObjectField in sortObject) {
-          if(sortObject[sortObjectField] === 'none') {
-            continue;
-          }
           let order = ('' + left[sortObjectField]).localeCompare(('' + right[sortObjectField]))
           orders ||= sortObject[sortObjectField] === 'asc' ? order : -order;
         }

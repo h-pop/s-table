@@ -1,7 +1,6 @@
 import sortUp from "./assets/sort-up.svg";
 import sortDown from "./assets/sort-down.svg";
-import { EventBus } from "./event-bus";
-import { Direction, EventEnum } from "./types";
+import { Direction } from "./types";
 import { SColumnDef } from "./s-column-def";
 
 export class SHeaderCell {
@@ -16,7 +15,7 @@ export class SHeaderCell {
         this.htmlElement.setAttribute('class', 's-header-cell');
         this.appendLabel(columnDefinition);
         this.appendSortIcon(`s-sort-up`, sortUp);
-        this.appendSortIcon('s-sort-down', sortDown);
+        this.appendSortIcon(`s-sort-down`, sortDown);
         this.htmlElement.addEventListener('click', this.sort.bind(this));
     }
 
@@ -55,7 +54,7 @@ export class SHeaderCell {
     private determineDirection(): Direction {
         const bothSortsHidden = this.htmlElement.querySelectorAll(`.${SHeaderCell.HIDDEN_CLASS}`).length > 1;
         const sortDescHidden = this.isSortDescHidden();
-        this.hideAllSorts();
+        this.hideSort();
         if (bothSortsHidden) {
             this.showSortAsc();
             return 'asc';
@@ -67,8 +66,8 @@ export class SHeaderCell {
         }
     }
 
-    private hideAllSorts() {
-        document.querySelectorAll('#s-sort-up, #s-sort-down')
+    private hideSort() {
+        this.htmlElement.querySelectorAll('#s-sort-up, #s-sort-down')
             .forEach(a => a.setAttribute('class', SHeaderCell.HIDDEN_CLASS));
     }
 

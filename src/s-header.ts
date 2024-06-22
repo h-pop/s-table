@@ -26,7 +26,11 @@ export class SHeader {
     }
 
     private onSortChange(columnDefinition: SColumnDef, direction: Direction) {
-        this.sortObject[columnDefinition.name] = direction;
+        if (direction === 'none') {
+            delete this.sortObject[columnDefinition.name];
+        } else {
+            this.sortObject[columnDefinition.name] = direction;
+        }
         EventBus.getInstance().emit(EventEnum.SORT, this.sortObject);
     }
 }
