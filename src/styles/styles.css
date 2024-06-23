@@ -1,7 +1,7 @@
 :root {
     --s-table-padding: 8px;
-    --s-table-c-primary: color(srgb 0.32 0.36 0.41);
-    --s-table-c-secondary: color(srgb 0.42 0.46 0.51);
+    --s-table-c-primary: #525c69;
+    --s-table-c-secondary: #6b7582;
     --s-table-c-font: white;
 }
 
@@ -14,6 +14,8 @@
 .s-table-main *::before, 
 .s-table-main *::after {
     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     color: var(--s-table-c-font);
     font-family: "Segoe UI";
 }
@@ -72,11 +74,17 @@
 .s-body-row {
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid var(--s-table-c-font);
+    border-bottom: 1px solid var(--s-table-c-secondary);
+    &:hover, &.selected {
+        background-color: var(--s-table-c-secondary);
+    }
 }
 
 .s-body-cell {
     flex: 1 1 0px;
     align-content: center;
     padding: var(--s-table-padding);
+    &:hover, &.selected {
+        outline: 1px solid white;
+    }
 }
