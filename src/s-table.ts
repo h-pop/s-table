@@ -2,7 +2,7 @@ import "./styles/styles.css";
 import { SBody } from "./s-body";
 import { SHeader } from "./s-header";
 import { EventBus } from "./event-bus";
-import { EventEnum, Sort } from "./types";
+import { EventEnum } from "./types";
 import { STableConfig } from "./s-table-config";
 import { SFilter } from "./s-filter";
 
@@ -31,8 +31,32 @@ export class STable {
     this.createBody();
   }
 
-  private sortData(sortObject) {
-    return this.sTableConfig.data.slice()
+  private createHeader(): void {
+    this.sHeader = new SHeader(this.sTableConfig.columns);
+    this.htmlElement.appendChild(this.sHeader.get());
+    EventBus.getInstance().subscribe(EventEnum.SORT, () => this.operateData());
+  }
+
+  private createFilter(): void {
+    this.sFilter = new SFilter(this.sTableConfig.columns);
+    this.htmlElement.appendChild(this.sFilter.get());
+    EventBus.getInstance().subscribe(EventEnum.FILTER, () => this.operateData());
+  }
+
+  private createBody(data = this.sTableConfig.data): void {
+    this.sBody = new SBody(data);
+    this.htmlElement.appendChild(this.sBody.get());
+  }
+
+  private operateData() {
+    this.htmlElement.querySelector('.s-body-main')?.remove();
+    const filteredData = this.filterData(this.sFilter.getFilterObject());
+    const operatedData = this.sortData(this.sHeader.getSortObject(), filteredData);
+    this.createBody(operatedData);
+  }
+
+  private sortData(sortObject, data = this.sTableConfig.data) {
+    return data.slice()
       .sort((left, right) => {
         let orders: number;
         for (const sortObjectField in sortObject) {
@@ -43,37 +67,12 @@ export class STable {
       });
   }
 
-  private filterData(filterObject) {
-    let result = this.sTableConfig.data;
+  private filterData(filterObject, data = this.sTableConfig.data) {
+    let result = data;
     for (const filterObjectField in filterObject) {
       result = result.filter(e => ('' + e[filterObjectField])?.includes(filterObject[filterObjectField]));
     }
     return result;
-  }
-
-  private createHeader(): void {
-    this.sHeader = new SHeader(this.sTableConfig.columns);
-    this.htmlElement.appendChild(this.sHeader.get());
-    EventBus.getInstance().subscribe(EventEnum.SORT, (sort: Sort) => {
-      this.htmlElement.querySelector('.s-body-main')?.remove();
-      const sortedData = this.sortData(sort);
-      this.createBody(sortedData);
-    });
-  }
-
-  private createFilter(): void {
-    this.sFilter = new SFilter(this.sTableConfig.columns);
-    this.htmlElement.appendChild(this.sFilter.get());
-    EventBus.getInstance().subscribe(EventEnum.FILTER, (emitted: any) => {
-      this.htmlElement.querySelector('.s-body-main')?.remove();
-      const filteredData = this.filterData(emitted);
-      this.createBody(filteredData);
-    });
-  }
-
-  private createBody(data = this.sTableConfig.data): void {
-    this.sBody = new SBody(data);
-    this.htmlElement.appendChild(this.sBody.get());
   }
 
   // PUBLIC API
