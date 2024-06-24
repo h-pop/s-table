@@ -44,7 +44,7 @@ export class STable {
   }
 
   private createBody(data = this.sTableConfig.data): void {
-    this.sBody = new SBody(data);
+    this.sBody = new SBody(this.sTableConfig.columns, data);
     this.htmlElement.appendChild(this.sBody.get());
   }
 

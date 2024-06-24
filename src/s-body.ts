@@ -1,26 +1,26 @@
+import { SColumnDef } from "./s-column-def";
+
 export class SBody {
 
     htmlElement: HTMLElement;
     selectedCell: HTMLDivElement;
     selectedRow: HTMLDivElement;
     
-    constructor(data) {
+    constructor(columnDefs: SColumnDef[], data) {
         this.htmlElement = document.createElement('div');
         this.htmlElement.setAttribute('class', 's-body-main');
         data?.forEach(entry => {
             const row = document.createElement('div');
             row.setAttribute('class', 's-body-row');
-            row.addEventListener('click', () => this.onRowClick(row));
-            for (const field in entry) {
-                if (Object.prototype.hasOwnProperty.call(entry, field)) {
-                    const cell = document.createElement('div');
-                    cell.setAttribute('class', 's-body-cell');
-                    const cellTextNode = document.createTextNode(entry[field]);
-                    cell.appendChild(cellTextNode);
-                    cell.addEventListener('click', () => this.onCellClick(cell));
-                    row.appendChild(cell);
-                }
-            }
+            row.addEventListener('click', this.onRowClick.bind(this, row));
+            columnDefs.forEach(cd => {
+                const cell = document.createElement('div');
+                cell.setAttribute('class', 's-body-cell');
+                const cellTextNode = document.createTextNode(entry[cd.name]);
+                cell.appendChild(cellTextNode);
+                cell.addEventListener('click', this.onCellClick.bind(this, cell));
+                row.appendChild(cell);
+            });
             this.htmlElement.appendChild(row);
         });
     }

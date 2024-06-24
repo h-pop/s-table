@@ -7618,11 +7618,11 @@ class TestData {
         }
     ];
     static animalsColumns = [
-        { name: 'name' },
-        { name: 'type' },
-        { name: 'isVaccinated' },
+        { name: 'context' },
         { name: 'incidentDescription' },
-        { name: 'context' }
+        { name: 'isVaccinated' },
+        { name: 'type' },
+        { name: 'name' }
     ];
     static animalsConfiguration = {
         data: TestData.animals,
