@@ -28,6 +28,9 @@
     display: flex;
     background-color: var(--s-table-c-secondary);
     border-radius: 8px 8px 0 0;
+    &.s-hidden {
+        display: none;
+    }
 }
 
 .s-header-cell {

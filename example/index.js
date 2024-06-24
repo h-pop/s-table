@@ -7626,11 +7626,13 @@ class TestData {
     ];
     static animalsConfiguration = {
         data: TestData.animals,
-        columns: TestData.animalsColumns
+        columns: TestData.animalsColumns,
+        showFilter: true
     };
 }
 const htmlElement = document.getElementById('s-table-container');
 const config = TestData.animalsConfiguration;
-config.showFilter = true;
 const instance = sTable.create(htmlElement, config);
-// instance.showFilter(true);
+
+const showFilterButton = document.querySelector('#show-filter-button');
+showFilterButton.addEventListener('click', () => instance.showFilter(config.showFilter = !config.showFilter));

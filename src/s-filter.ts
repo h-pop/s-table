@@ -23,7 +23,7 @@ export class SFilter {
     }
 
     public hide() {
-        this.htmlElement.setAttribute('class', 's-hidden');
+        this.htmlElement.classList.add('class', 's-hidden');
     }
 
     public show() {
