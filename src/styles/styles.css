@@ -8,6 +8,7 @@
 .s-table-main {
     background-color: var(--s-table-c-primary);
     border-radius: 8px;
+    overflow: auto;
 }
 
 .s-table-main *, 

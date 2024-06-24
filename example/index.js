@@ -7618,16 +7618,19 @@ class TestData {
         }
     ];
     static animalsColumns = [
+        { name: 'name' },
         { name: 'context' },
         { name: 'incidentDescription' },
         { name: 'isVaccinated' },
-        { name: 'type' },
-        { name: 'name' }
+        { name: 'type' }
     ];
     static animalsConfiguration = {
         data: TestData.animals,
         columns: TestData.animalsColumns,
-        showFilter: true
+        showFilter: true,
+        style: {
+            height: '600px'
+        }
     };
 }
 const htmlElement = document.getElementById('s-table-container');

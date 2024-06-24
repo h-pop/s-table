@@ -21,6 +21,7 @@ export class STable {
     container.appendChild(this.htmlElement);
     this.htmlElement.setAttribute('class', 's-table-main');
     this.create();
+    this.applyStyles();
   }
 
   private create(): void {
@@ -29,6 +30,10 @@ export class STable {
       this.createFilter();
     }
     this.createBody();
+  }
+
+  private applyStyles(): void {
+    this.htmlElement.style.height = this.sTableConfig.style.height;
   }
 
   private createHeader(): void {

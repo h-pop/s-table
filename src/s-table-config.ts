@@ -4,4 +4,7 @@ export class STableConfig {
     columns: SColumnDef[];
     showFilter: boolean;
     data: any[];
+    style: {
+        height: string;
+    }
 }
